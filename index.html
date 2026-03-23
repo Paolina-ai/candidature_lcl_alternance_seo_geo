@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidature Alternance SEO et GEO - Paolina x LCL</title>
+    
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lclBlue: '#3953A4',      /* Bleu secondaire plus vif LCL */
+                        lclDarkBlue: '#1B2A5E',  /* Bleu très foncé principal LCL */
+                        lclYellow: '#FFC600',    /* Jaune institutionnel LCL */
+                        lclLightBlue: '#F2F5F9', /* Bleu/gris très clair pour les fonds */
+                        lclLight: '#FFFFFF',     /* Blanc pur */
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'scale-in': 'scaleIn 0.6s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Styles personnalisés pour les accordéons et animations */
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-btn.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Dégradés LCL */
+        .gradient-lcl {
+            background: linear-gradient(135deg, #1B2A5E 0%, #3953A4 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        
+        html { scroll-behavior: smooth; }
+        
+        nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        nav a {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFC600;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        button, a[href^="#"], a[download] { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        i { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover i { transform: scale(1.1); }
+        
+        span[class*="rounded-full"] { transition: all 0.3s ease; }
+        span[class*="rounded-full"]:hover { transform: scale(1.05); }
+        
+        .skill-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .skill-card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #3953A4;
+        }
+        
+        .timeline-dot { transition: all 0.3s ease; }
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(255, 198, 0, 0.4);
+        }
+        
+        .particle { animation: float 6s ease-in-out infinite; }
+        .particle:nth-child(2) { animation-delay: -2s; animation-duration: 8s; }
+        .particle:nth-child(3) { animation-delay: -4s; animation-duration: 10s; }
+        
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            background-color: #FFC600;
+            color: #1B2A5E;
+            border: none;
+        }
+        .cta-button:hover {
+            background-color: #e6b200;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 198, 0, 0.3);
+        }
+        
+        .accordion-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .accordion-btn:hover { transform: translateX(5px); }
+        
+        .timeline-step { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .timeline-step:hover { transform: scale(1.05); }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        body { animation: fadeIn 0.5s ease-in; }
+        
+        /* Barre de progression */
+        .progress-bar-container {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 200px;
+            background: rgba(27, 42, 94, 0.1);
+            border-radius: 10px;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .progress-bar-fill {
+            width: 100%;
+            background: linear-gradient(180deg, #FFC600 0%, #1B2A5E 100%);
+            border-radius: 10px;
+            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 0%;
+        }
+    </style>
+</head>
+<body class="bg-lclLightBlue text-lclDarkBlue antialiased selection:bg-lclYellow selection:text-lclDarkBlue">
+
+    <!-- BARRE DE PROGRESSION -->
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+    </div>
+
+    <!-- NAVIGATION MENU -->
+    <nav id="main-nav" class="fixed w-full z-50 top-0 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-extrabold text-xl text-lclDarkBlue tracking-tight flex items-center">
+                Paolina<span class="text-lclYellow text-3xl leading-none mx-0.5">.</span><span class="text-lclBlue ml-1 font-semibold">LCL</span>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 font-bold text-sm">
+                <a href="#pourquoi" class="text-lclDarkBlue hover:text-lclBlue transition-colors">Pourquoi je candidate</a>
+                <a href="#profil" class="text-lclDarkBlue hover:text-lclBlue transition-colors">Mon profil</a>
+                <a href="#contact" class="text-lclDarkBlue hover:text-lclBlue transition-colors">Me contacter</a>
+            </div>
+
+            <!-- Mobile Burger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-lclDarkBlue text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-lclDarkBlue absolute top-full left-0 w-full shadow-xl border-t border-white/10">
+            <div class="flex flex-col px-6 py-4 space-y-4 font-bold text-center">
+                <a href="#pourquoi" class="mobile-link text-white hover:text-lclYellow transition-colors py-3 border-b border-white/10">Pourquoi je candidate</a>
+                <a href="#profil" class="mobile-link text-white hover:text-lclYellow transition-colors py-3 border-b border-white/10">Mon profil</a>
+                <a href="#contact" class="mobile-link text-white hover:text-lclYellow transition-colors py-3">Me contacter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO SECTION -->
+    <header class="gradient-lcl min-h-screen flex flex-col justify-center relative overflow-hidden px-6 lg:px-20 pt-20 pb-10">
+        <!-- Particules décoratives d'arrière-plan -->
+        <div class="particle absolute top-1/4 left-10 w-32 h-32 bg-white rounded-full mix-blend-overlay opacity-10 animate-pulse-slow"></div>
+        <div class="particle absolute bottom-1/4 right-10 w-64 h-64 bg-lclYellow rounded-full mix-blend-overlay opacity-20 blur-3xl"></div>
+        <div class="particle absolute top-20 right-20 w-16 h-16 bg-white rounded-full mix-blend-overlay opacity-20"></div>
+
+        <div class="max-w-5xl mx-auto w-full z-10 text-center md:text-left">
+            <div class="inline-block px-5 py-1.5 rounded-full bg-lclYellow text-lclDarkBlue text-sm font-extrabold tracking-wider mb-6 animate-fade-in-up shadow-sm border border-yellow-400" style="animation-delay: 0.1s;">
+                CANDIDATURE ALTERNANCE
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up tracking-tight" style="animation-delay: 0.2s;">
+                Je suis Paolina,<br>
+                <span class="text-lclYellow drop-shadow-sm">candidate au poste d’Alternante SEO et GEO.</span>
+            </h1>
+            <p class="text-lg md:text-xl font-medium text-white/90 max-w-2xl mt-8 animate-fade-in-up leading-relaxed" style="animation-delay: 0.3s;">
+                Étudiante en Mastère 2 Stratégies E-business à l'ESD Paris.<br>
+                <strong>Rythme :</strong> 1 jour école / 4 jours entreprise (+ 1 sem. école toutes les 4-5 semaines).<br>
+                <span class="text-lclYellow font-bold"><i class="fas fa-calendar-check mr-2"></i>Disponible : Septembre 2026</span>
+            </p>
+            
+            <div class="mt-12 animate-fade-in-up flex flex-wrap gap-4 justify-center md:justify-start" style="animation-delay: 0.4s;">
+                <a href="#pourquoi" class="cta-button inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full transition-all duration-300 shadow-lg group">
+                    <span>Découvrir mon parcours</span>
+                    <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Motif vague bas de page -->
+        <div class="absolute bottom-0 left-0 w-full h-16 bg-lclLightBlue" style="clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);"></div>
+    </header>
+
+    <!-- SECTION 1 : POURQUOI JE CANDIDATE -->
+    <section id="pourquoi" class="py-20 px-6 lg:px-20 bg-lclLightBlue">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-lclDarkBlue mb-12 uppercase pb-4 relative inline-block reveal after:absolute after:bottom-0 after:left-0 after:w-24 after:h-1.5 after:bg-lclYellow after:rounded-full">
+                POURQUOI JE CANDIDATE ?
+            </h1>
+
+            <h2 class="text-2xl font-bold text-lclBlue mb-8 flex items-center reveal">
+                <div class="flex flex-col gap-1.5 mr-4 shrink-0">
+                    <div class="w-6 h-1.5 bg-lclYellow rounded-full"></div>
+                    <div class="w-3 h-1.5 bg-lclBlue rounded-full"></div>
+                </div>
+                Mon parcours :
+            </h2>
+
+            <!-- FORMATIONS -->
+            <div class="mb-12 reveal">
+                <div class="border-l-4 border-lclYellow pl-4 md:pl-6 ml-2 md:ml-0">
+                    <h3 class="text-xl font-bold text-gray-400 mb-6 uppercase tracking-wider">FORMATIONS</h3>
+                    <div class="relative border-l-2 border-lclYellow pl-6 ml-3 space-y-8">
+                        
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 bg-lclYellow rounded-full border-4 border-lclLightBlue"></div>
+                            <h4 class="font-bold text-lg text-lclDarkBlue">Mastère Stratégies E-Business</h4>
+                            <p class="text-gray-600 font-medium">2025 - 2027, École Supérieure du Digital (ESD) Paris</p>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 bg-gray-300 rounded-full border-4 border-lclLightBlue"></div>
+                            <h4 class="font-bold text-lg text-lclDarkBlue">BUT Techniques de Commercialisation</h4>
+                            <p class="text-gray-600 font-medium">2021 - 2024 • Spécialité Marketing digital, e-business et entrepreneuriat</p>
+                            <p class="text-sm text-gray-500 mt-1">BUT 3 : Échange universitaire à l’UADY (Mexique)<br>BUT 1 & 2 : Formation initiale à l’IUT d’Angers</p>
+                        </div>
+                        
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 bg-gray-300 rounded-full border-4 border-lclLightBlue"></div>
+                            <h4 class="font-bold text-lg text-lclDarkBlue">Baccalauréat Général</h4>
+                            <p class="text-gray-600 font-medium">2021 - Mention Très Bien, Section européenne anglais</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- DERNIÈRES EXPÉRIENCES -->
+            <div class="mb-12 reveal">
+                <div class="border-l-4 border-lclBlue pl-4 md:pl-6 ml-2 md:ml-0">
+                    <h3 class="text-xl font-bold text-gray-400 mb-6 uppercase tracking-wider">EXPÉRIENCES PROFESSIONNELLES</h3>
+                    <div class="space-y-4">
+                        
+                        <!-- Expérience 1 : Les Sherpas (Cœur de l'expertise SEO/GEO & LLM) -->
+                        <div class="border border-lclYellow border-2 rounded-xl overflow-hidden hover-lift bg-white shadow-md reveal-delay-1 relative">
+                            <div class="absolute top-0 right-0 bg-lclYellow text-lclDarkBlue text-[10px] font-bold px-3 py-1 rounded-bl-lg"></div>
+                            <div class="w-full px-6 py-5 mt-2 text-left bg-white border-b border-gray-100 flex justify-between items-start flex-col sm:flex-row gap-2">
+                                <div>
+                                    <h4 class="font-bold text-lg text-lclDarkBlue">Alternante Cheffe de projets SEO / GEO</h4>
+                                    <p class="text-sm text-lclBlue font-bold mt-1">Les Sherpas, Paris (75)</p>
+                                </div>
+                                <span class="bg-lclDarkBlue text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">Depuis août 2025</span>
+                            </div>
+                            <div class="bg-white px-6">
+                                <ul class="list-none space-y-3 py-4 text-gray-700 text-sm">
+                                    <li class="flex items-start"><i class="fas fa-search text-lclBlue mt-1 mr-3"></i><span><strong>SEO & Contenu :</strong> Réalisation d'audits (technique, contenu, structure) et optimisation des pages (balisage Hn, maillage interne, UX d'arrivée) pour maximiser la conversion.</span></li>
+                                    <li class="flex items-start"><i class="fas fa-robot text-lclBlue mt-1 mr-3"></i><span><strong>Stratégie GEO :</strong> Optimisation de l'indexation dans les LLMs via l'analyse de prompts et veille active sur les évolutions du LLM Search (AI Overviews).</span></li>
+                                    <li class="flex items-start"><i class="fas fa-chart-line text-lclBlue mt-1 mr-3"></i><span><strong>Analyse & Reporting :</strong> Suivi des KPIs (GA4, GSC, Semrush) et création de reportings automatisés SEO et GEO.</span></li>
+                                    <li class="flex items-start"><i class="fas fa-project-diagram text-lclBlue mt-1 mr-3"></i><span><strong>Coordination & Netlinking :</strong> Déploiement de la stratégie de linkbuilding et collaboration avec les équipes transverses (Contenu, IT).</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Expérience 2 : La Banque Postale (Expertise Secteur Bancaire) -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm reveal-delay-2">
+                            <div class="w-full px-6 py-4 text-left bg-gray-50 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-bold text-lclDarkBlue">Chargée de relation bancaire</h4>
+                                    <p class="text-xs text-gray-500 font-semibold mt-1">La Banque Postale, Olivet (2025 - 6 mois)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white px-6 py-3 text-gray-600 text-sm border-t border-gray-100">
+                                <p><i class="fas fa-university text-gray-400 mr-2"></i>Compréhension des <strong>enjeux du secteur bancaire</strong> et de la relation client.</p>
+                            </div>
+                        </div>
+
+                        <!-- Expérience 3 : Téléperformance (Relation Client) -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm reveal-delay-3">
+                            <div class="w-full px-6 py-4 text-left bg-gray-50 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-bold text-lclDarkBlue">Télé-conseillère commerciale</h4>
+                                    <p class="text-xs text-gray-500 font-semibold mt-1">Téléperformance, Fleury-les-Aubrais (2024/2025 - 6 mois)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white px-6 py-3 text-gray-600 text-sm border-t border-gray-100">
+                                <p><i class="fas fa-headset text-gray-400 mr-2"></i>Relation client et maîtrise du CRM Salesforce.</p>
+                            </div>
+                        </div>
+
+                        <!-- Expérience 4 : C.R.T (Bases du SEO local) -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm reveal-delay-4">
+                            <div class="w-full px-6 py-4 text-left bg-gray-50 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-bold text-lclDarkBlue">Stagiaire web éditorial SEO / Assistante Marketing digital</h4>
+                                    <p class="text-xs text-gray-500 font-semibold mt-1">Comité Régional du Tourisme, Orléans (2023 - 4 mois)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white px-6 py-4 text-gray-700 text-sm border-t border-gray-100">
+                                <ul class="list-none space-y-2">
+                                    <li class="flex items-start"><i class="fas fa-map-marker-alt text-gray-400 mt-1 mr-3"></i><span>Rédaction de contenus éditoriaux web <strong>géo-localisés (pages villes/départements)</strong>.</span></li>
+                                    <li class="flex items-start"><i class="fas fa-envelope-open-text text-gray-400 mt-1 mr-3"></i><span>Réalisation de newsletters en cohérence avec la stratégie SEO & SEA pour soutenir l'activité locale.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEPARATEUR -->
+            <div class="flex flex-col items-center justify-center my-12 reveal">
+                <div class="w-1 h-16 bg-gradient-to-b from-lclYellow to-lclBlue rounded-full opacity-80"></div>
+                <i class="fas fa-chevron-down text-lclBlue text-2xl animate-bounce mt-2"></i>
+            </div>
+
+            <!-- FIL ROUGE -->
+            <div class="bg-lclDarkBlue text-white rounded-3xl p-8 md:p-12 shadow-xl reveal relative overflow-hidden">
+                <!-- Décoration -->
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-lclBlue rounded-full mix-blend-screen opacity-50 blur-2xl"></div>
+                
+                <h2 class="text-2xl font-bold text-white mb-10 flex items-center">
+                    <div class="flex flex-col gap-1.5 mr-4 shrink-0">
+                        <div class="w-6 h-1.5 bg-lclYellow rounded-full"></div>
+                        <div class="w-3 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                    Une suite logique
+                </h2>
+                
+                <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-lclLight before:to-transparent">
+                    
+                    <!-- Step 1 -->
+                    <div class="timeline-item relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full bg-lclDarkBlue border-4 border-gray-400 text-gray-400 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">1</div>
+                        <div class="timeline-step w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 backdrop-blur rounded-xl p-5 border border-white/10 hover:border-gray-400 transition-colors ml-4 md:ml-0">
+                            <h3 class="font-bold text-gray-300 mb-2 uppercase text-sm">Première expérience : Bases du SEO</h3>
+                            <p class="text-sm text-gray-400">Mon stage au Comité Régional du Tourisme m'a permis d'acquérir les fondamentaux du SEO.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="timeline-item relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full bg-lclDarkBlue border-4 border-lclBlue text-lclBlue font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">2</div>
+                        <div class="timeline-step w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 backdrop-blur rounded-xl p-5 border border-white/10 hover:border-lclBlue transition-colors ml-4 md:ml-0">
+                            <h3 class="font-bold text-lclBlue mb-2 uppercase text-sm">Connaissance des enjeux bancaires</h3>
+                            <p class="text-sm text-gray-300">Mon expérience à La Banque Postale m'a permis de comprendre les enjeux du secteur et les problématiques de la relation client, et surtout, m'a donné envie d'y évoluer.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="timeline-item relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full bg-lclDarkBlue border-4 border-lclYellow text-lclYellow font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">3</div>
+                        <div class="timeline-step w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 backdrop-blur rounded-xl p-5 border border-white/10 hover:border-lclYellow transition-colors ml-4 md:ml-0">
+                            <h3 class="font-bold text-lclYellow mb-2 uppercase text-sm">Une année d'expertise SEO/GEO & LLM</h3>
+                            <p class="text-sm text-gray-300">Forte d'une expertise technique acquise cette année en GEO et sur les LLMs, je souhaite continuer à monter en compétences sur ces nouveaux sujets d'acquisition tout en changeant de secteur pour rejoindre l'environnement stimulant de LCL.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="timeline-item relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full bg-lclYellow text-lclDarkBlue font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"><i class="fas fa-rocket"></i></div>
+                        <div class="timeline-step w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white text-lclDarkBlue rounded-xl p-5 shadow-lg ml-4 md:ml-0 hover-lift cursor-default border-2 border-lclYellow">
+                            <h3 class="font-bold mb-2 uppercase text-lclBlue">L'ambition : Devenir experte SEO & GEO chez LCL</h3>
+                            <p class="text-sm font-medium">Rejoindre LCL est la suite logique : associer mon appétence pour le secteur bancaire à ma maîtrise des leviers GEO et IA. LCL est l'environnement idéal pour relever de nouveaux défis techniques et poursuivre ma montée en compétences, tout en contribuant activement à l'acquisition de nouveaux clients.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2 : MON PROFIL -->
+    <section id="profil" class="py-20 px-6 lg:px-20 bg-white border-t border-gray-200">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-lclDarkBlue mb-12 uppercase pb-4 relative inline-block reveal after:absolute after:bottom-0 after:left-0 after:w-24 after:h-1.5 after:bg-lclYellow after:rounded-full">
+                COMPÉTENCES & OUTILS
+            </h1>
+
+            <h2 class="text-2xl font-bold text-lclBlue mb-10 flex items-center reveal">
+                <div class="flex flex-col gap-1.5 mr-4 shrink-0">
+                    <div class="w-6 h-1.5 bg-lclYellow rounded-full"></div>
+                    <div class="w-3 h-1.5 bg-lclBlue rounded-full"></div>
+                </div>
+                Domaines d'expertise :
+            </h2>
+
+            <!-- SOUS-PARTIE 1 : MISSIONS CLÉS LCL -->
+            <div class="mb-16 reveal">
+                <div class="border-l-4 border-lclYellow pl-4 md:pl-6 ml-2 md:ml-0">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Stratégie Search -->
+                        <div class="skill-card bg-lclLightBlue p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-lclDarkBlue mb-3 uppercase text-sm tracking-wide flex items-center"><i class="fas fa-search text-lclBlue text-lg mr-2"></i> SEO & Optimisation On-Site</h4>
+                            <p class="text-gray-600 text-sm mb-4">Réalisation d'audits techniques et sémantiques. Optimisation de l'arborescence (balisage Hn, maillage interne) et amélioration de l'UX d'arrivée pour maximiser la conversion.</p>
+                        </div>
+
+                        <!-- Rédaction web -->
+                        <div class="skill-card bg-lclLightBlue p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-lclDarkBlue mb-3 uppercase text-sm tracking-wide flex items-center"><i class="fas fa-robot text-lclBlue text-lg mr-2"></i> GEO & Présence LLM</h4>
+                            <p class="text-gray-600 text-sm mb-4">Analyse de prompts et veille active (AI Overviews). Compréhension des formats compatibles et structuration des contenus pour garantir l'indexation et la qualité de réponse dans les LLMs.</p>
+                        </div>
+
+                        <!-- Data & Reporting -->
+                        <div class="skill-card bg-lclLightBlue p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-lclDarkBlue mb-3 uppercase text-sm tracking-wide flex items-center"><i class="fas fa-chart-pie text-lclBlue text-lg mr-2"></i> Analyse, Data & IT</h4>
+                            <p class="text-gray-600 text-sm mb-4">Création de reportings réguliers précis. Collaboration avec les équipes techniques (IT, Data) pour assurer le déploiement des recommandations SEO.</p>
+                        </div>
+
+                        <!-- Automatisation -->
+                        <div class="skill-card bg-lclLightBlue p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-lclDarkBlue mb-3 uppercase text-sm tracking-wide flex items-center"><i class="fas fa-star text-lclBlue text-lg mr-2"></i> Quelques réalisations :</h4>
+                            <ul class="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                                <li><strong>Audit SEO / GEO Dinmo</strong> : Analyse des performances, détection de nouvelles opportunités et formulation de recommandations d’amélioration directement actionnables.</li>
+                                <li><strong>Reporting GEO automatisé</strong> : Récupération de données via l'API Qwairy (outils d'analyse GEO) grâce à App Script pour générer un reporting complet sur Google Sheets et envoyer un résumé sur Slack.</li>
+                                <li><strong>Agent GPT Custom</strong> : Agent rédactionnel nourri avec une base de connaissances interne pour maximiser la productivité et garantir une fidélité absolue à la charte éditoriale.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OUTILS MAITRISÉS -->
+            <div class="mb-16 reveal">
+                <div class="border-l-4 border-lclBlue pl-4 md:pl-6 ml-2 md:ml-0">
+                    <h2 class="text-2xl font-bold text-lclDarkBlue mb-8 flex items-center">
+                        <i class="fas fa-toolbox text-lclBlue mr-3"></i> Boîte à outils technique :
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="skill-card bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-t-4 border-t-lclYellow">
+                            <h3 class="font-bold text-center border-b pb-3 mb-4 text-lclDarkBlue"><i class="fas fa-search-location text-lclYellow mr-2"></i> SEO & Local</h3>
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">SemRush</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Ahrefs</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">ScreamingFrog</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Haloscan</span>
+                                <span class="px-3 py-1 bg-gray-50 text-gray-600 rounded-full text-sm font-medium border border-dashed border-gray-300">Google Business Profile</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="skill-card bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-t-4 border-t-lclBlue">
+                            <h3 class="font-bold text-center border-b pb-3 mb-4 text-lclDarkBlue"><i class="fas fa-microchip text-lclBlue mr-2"></i> LLM & CMS</h3>
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">ChatGPT</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Gemini</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Claude</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Copilot</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">WordPress</span>
+                                <span class="px-3 py-1 bg-gray-50 text-gray-600 rounded-full text-sm font-medium border border-dashed border-gray-300">HTML / CSS</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="skill-card bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                            <h3 class="font-bold text-center border-b pb-3 mb-4 text-lclDarkBlue"><i class="fas fa-chart-line text-gray-500 mr-2"></i> Data & Automatisation</h3>
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">GA4</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Google Search Console</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Piano Analytics</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Qwairy</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Make / Zapier / N8N</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium border border-gray-200">Pack Office</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOFT SKILLS & CERTIFICATIONS -->
+            <div class="reveal">
+                <h2 class="text-2xl font-bold text-lclDarkBlue mb-8 flex items-center">
+                    <div class="flex flex-col gap-1.5 mr-4 shrink-0">
+                        <div class="w-6 h-1.5 bg-lclYellow rounded-full"></div>
+                        <div class="w-3 h-1.5 bg-lclBlue rounded-full"></div>
+                    </div>
+                    Savoir-être (Soft Skills) & Certifications :
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
+                    
+                    <!-- Soft Skill 1 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm w-full">
+                        <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none">
+                            <div class="flex items-center pr-4">
+                                <div class="bg-blue-50 text-lclBlue rounded-full mr-4 shrink-0 w-10 h-10 flex items-center justify-center"><i class="fas fa-compass"></i></div>
+                                <h4 class="font-bold text-lclDarkBlue text-sm md:text-base leading-tight">Autonomie et Force de proposition</h4>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 accordion-icon shrink-0"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-5 md:px-6">
+                            <div class="py-4 text-gray-600 text-sm border-t border-gray-100">
+                                <p>Mon expérience actuelle dans une start-up m'a appris à trouver des solutions seule et à prendre des initiatives pertinentes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skill 2 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm w-full">
+                        <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none">
+                            <div class="flex items-center pr-4">
+                                <div class="bg-orange-50 text-orange-600 rounded-full mr-4 shrink-0 w-10 h-10 flex items-center justify-center"><i class="fas fa-ear-listen"></i></div>
+                                <h4 class="font-bold text-lclDarkBlue text-sm md:text-base leading-tight">Capacité d'adaptation</h4>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 accordion-icon shrink-0"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-5 md:px-6">
+                            <div class="py-4 text-gray-600 text-sm border-t border-gray-100">
+                                <p>Mes nombreuses expériences professionnelles et mon échange universitaire au Mexique m'ont permis d'être rapidement opérationnelle dans n'importe quel nouvel environnement.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skill 3 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm w-full">
+                        <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none">
+                            <div class="flex items-center pr-4">
+                                <div class="bg-yellow-50 text-yellow-600 rounded-full mr-4 shrink-0 w-10 h-10 flex items-center justify-center"><i class="fas fa-users"></i></div>
+                                <h4 class="font-bold text-lclDarkBlue text-sm md:text-base leading-tight">Écoute et Esprit d'équipe</h4>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 accordion-icon shrink-0"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-5 md:px-6">
+                            <div class="py-4 text-gray-600 text-sm border-t border-gray-100">
+                                <p>Les nombreux projets collaboratifs menés lors de mon cursus étudiant m'ont appris à fédérer autour d'un but commun et à intégrer les idées de chacun.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skill 4 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm w-full">
+                        <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none">
+                            <div class="flex items-center pr-4">
+                                <div class="bg-teal-50 text-teal-600 rounded-full mr-4 shrink-0 w-10 h-10 flex items-center justify-center"><i class="fas fa-chart-line"></i></div>
+                                <h4 class="font-bold text-lclDarkBlue text-sm md:text-base leading-tight">Curiosité et Volonté d'évoluer</h4>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 accordion-icon shrink-0"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-5 md:px-6">
+                            <div class="py-4 text-gray-600 text-sm border-t border-gray-100">
+                                <p>Mon poste actuel exige une veille technologique constante (IA, LLM, Search), ce qui nourrit mon envie d'apprendre et de rester à jour sur les nouvelles pratiques.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skill 5 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden hover-lift bg-white shadow-sm w-full">
+                        <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none">
+                            <div class="flex items-center pr-4">
+                                <div class="bg-indigo-50 text-indigo-600 rounded-full mr-4 shrink-0 w-10 h-10 flex items-center justify-center"><i class="fas fa-pen-fancy"></i></div>
+                                <h4 class="font-bold text-lclDarkBlue text-sm md:text-base leading-tight">Capacités rédactionnelles</h4>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 accordion-icon shrink-0"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-5 md:px-6">
+                            <div class="py-4 text-gray-600 text-sm border-t border-gray-100">
+                                <p>Aiguisées par la rédaction régulière de contenus web optimisés pour le SEO et validées techniquement par ma Certification Voltaire (niveau Affaires).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Certifications & Langues -->
+                    <div class="bg-white border-2 border-lclBlue rounded-xl p-5 shadow-md flex flex-col justify-center relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 text-lclLightBlue text-6xl opacity-50"><i class="fas fa-award"></i></div>
+                        <h4 class="font-bold text-lclDarkBlue mb-4 border-b border-gray-100 pb-2 relative z-10"><i class="fas fa-certificate text-lclBlue mr-2"></i> Certifications & Langues</h4>
+                        
+                        <div class="text-sm text-gray-700 space-y-3 relative z-10">
+                            <!-- Focus Voltaire -->
+                            <div class="bg-blue-50 border border-blue-100 p-2 rounded flex items-start">
+                                <i class="fas fa-check-circle text-lclBlue mt-1 mr-2"></i>
+                                <div>
+                                    <strong class="text-lclDarkBlue">Certification Voltaire (2023)</strong><br>
+                                    Niveau Affaires (Score : 721/900) - <em>Orthographe irréprochable</em>
+                                </div>
+                            </div>
+                            
+                            <p class="pt-1">
+                                <strong>Digital :</strong><br>
+                                <span class="inline-block bg-gray-100 px-2 py-1 rounded text-xs mt-1 font-medium">Piano Analytics (2025)</span>
+                                <span class="inline-block bg-gray-100 px-2 py-1 rounded text-xs mt-1 font-medium">Semrush SEO (2024)</span>
+                                <span class="inline-block bg-gray-100 px-2 py-1 rounded text-xs mt-1 font-medium">Hubspot Inbound (2024)</span>
+                            </p>
+                            
+                            <p class="pt-1 border-t border-gray-100">
+                                <strong>Langues :</strong><br>
+                                Anglais (Niveau B2) • Espagnol (Niveau C1)
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3 : CONTACT -->
+    <section id="contact" class="py-20 bg-lclDarkBlue text-white text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-lclBlue to-lclYellow"></div>
+        
+        <div class="max-w-3xl mx-auto px-6 relative z-10 reveal">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-12 uppercase pb-4 relative inline-block reveal after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1.5 after:bg-lclYellow after:rounded-full">
+                RENCONTRONS-NOUS
+            </h1>
+            
+            <p class="text-xl md:text-2xl font-light mb-12 leading-relaxed">
+                Vos enjeux en acquisition digitale et sur les nouveaux moteurs IA sont exactement les sujets sur lesquels je veux m'investir. <strong class="text-lclYellow font-bold">Échangeons</strong> sur vos prochains défis SEO/GEO et sur la manière dont je peux y contribuer.
+            </p>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
+                <div class="flex items-center bg-white/10 px-6 py-4 rounded-xl w-full md:w-auto hover:bg-white/20 transition-colors">
+                    <i class="fas fa-envelope text-lclYellow text-2xl mr-4"></i>
+                    <span class="text-lg font-medium">roiatti3paolina@gmail.com</span>
+                </div>
+                
+                <div class="flex items-center bg-white/10 px-6 py-4 rounded-xl w-full md:w-auto hover:bg-white/20 transition-colors">
+                    <i class="fas fa-phone-alt text-lclYellow text-2xl mr-4"></i>
+                    <span class="text-lg font-medium">07.83.06.79.94</span>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <a href="https://www.linkedin.com/in/paolina-roiatti-3b0a5a223/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-lclLightBlue hover:text-white transition-colors text-xl font-bold group">
+                    <i class="fab fa-linkedin text-3xl mr-3 group-hover:scale-110 transition-transform text-lclBlue bg-white rounded-md"></i> Paolina Roiatti
+                </a>
+            </div>
+
+            <!-- BOUTON CV -->
+            <a href="cv.pdf" download="CV_Paolina_Roiatti_LCL.pdf" class="inline-flex items-center justify-center bg-lclYellow text-lclDarkBlue font-extrabold text-lg md:text-xl px-10 py-5 rounded-full hover:bg-[#e6b200] transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(255,198,0,0.3)] hover:shadow-[0_0_30px_rgba(255,198,0,0.6)]">
+                <i class="fas fa-file-download mr-3"></i> Télécharger mon CV classique
+            </a>
+        </div>
+        
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f1836] text-gray-400 text-center py-6 text-sm font-medium">
+        <p>Candidature interactive conçue spécifiquement pour LCL - 2026</p>
+    </footer>
+
+    <!-- SCRIPTS POUR L'INTERACTIVITÉ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Menu mobile
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const menuIcon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Accordéons
+            const accordions = document.querySelectorAll('.accordion-btn');
+            accordions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    accordions.forEach(otherBtn => {
+                        if (otherBtn !== this) {
+                            otherBtn.classList.remove('active');
+                            otherBtn.nextElementSibling.classList.remove('active');
+                        }
+                    });
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    content.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer (Fade in au scroll)
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Navigation style au scroll
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Barre de progression
+            const progressBar = document.getElementById('progress-bar');
+            const updateProgress = () => {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollableHeight = documentHeight - windowHeight;
+                const progress = (scrollTop / scrollableHeight) * 100;
+                progressBar.style.height = Math.min(100, Math.max(0, progress)) + '%';
+            };
+
+            window.addEventListener('scroll', updateProgress);
+            window.addEventListener('resize', updateProgress);
+            updateProgress();
+
+            // Ancrages fluides
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const offsetTop = target.offsetTop - 80;
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Effet Parallax sur les cartes
+            const cards = document.querySelectorAll('.hover-lift, .skill-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 30;
+                    const rotateY = (centerX - x) / 30;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale(1.01)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
